@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Methods</title>
+</head>
+<body>
+    <div id="display"></div>
+    <div id="displaySize"></div>
+    <div id="displayString"></div>
+    <div id="displayAt"></div>
+    <div id="displayJoin"></div>
+    <div id="popItem"></div>
+    <div id="shiftItem"></div>
+    <div id="displayUnshift"></div>
+    <div id="mergeArray"></div>
+    <div id="slicedArray"></div>
+
+    <div class="container">
+        <input type="text" id="input" placeholder="Enter item to add"/>
+        <button onclick="addArray()">Add Item</button>
+        <br><Br>
+        <button onclick="showLength()">Array Length</button>
+        <button onclick="showString()">Array to String</button>
+        <button onclick="joinArray()">Join()</button>
+        <button onclick="popItem()">Pop()</button>
+        <button onclick="shiftItem()">Shift()</button>
+        <button onclick="concatArray()">ConCat()</button>
+        <button onclick="copyItem()">Copy(first item)</button>
+        <button onclick="flatArray()">Flat()</button>
+        <button onclick="sliceArray()">Slice(3)</button>
+
+        <br /><br />
+        <input type="text" id="indexAt" placeholder="Enter item index"/>
+        <button onclick="displayAt()">at()</button>
+
+        <input type="text" id="unshiftItem" placeholder="Enter new item name"/>
+        <button onclick="unshiftItem()">Unshift()</button>
+
+        <br /><br />
+        <input type="text" id="item" placeholder="Enter item name"/>
+        <button onclick="removeItem()">Splice()</button>
+        <input type="text" id="deleteIndex" placeholder="Enter index to delete">
+        <button onclick="deleteItem()">Delete[]</button>
+        
+
+        <br /><br />
+        <input type="text" id="item1" placeholder="Enter item name to splice"/>
+        <button onclick="toSpliceItem()">toSplice()</button>
+
+      </div>
+    <script>
+        const itemArray = [];
+
+        function addArray() {
+            let item = document.getElementById('input').value;
+
+            if (item != "" && item != null) {
+// push or add an item to the existing array
+                itemArray.push(item);
+                // displaying the array
+                document.getElementById('display'). innerHTML = `<b>Existing array :</b> [${itemArray}]`;
+                // cleans the input field
+                document.getElementById('input'). value = "";
+            } else {
+                alert("Gwapa, ayaw tawn blankohi");
+            }
+        }
+
+        function showLength() {
+// getting the array length
+            let size = itemArray.length;
+// displaying the length of the array
+            document.getElementById('displaySize').innerHTML = `<b>Length of the existing array:</b> ${size}`;
+        }
+   
+        function showString() {
+// returns the array as a coma separated string or the toString() method
+            let array2String = itemArray.toString();
+            document.getElementById('displayString').innerHTML = `<b>Array to String: </b>${array2String}`;
+        }
+
+        function displayAt() {
+// returns the indexed element from the array or the at() method
+            let index = document.getElementById('indexAt').value;
+
+            if (index != null && index != "") {
+                let indexedItem = itemArray.at(index);
+                document.getElementById('displayAt').innerHTML = `<b>The item that is on index ${index} is:</b> ${indexedItem}`;
+                document.getElementById('indexAt').value = "";
+            } else {
+                alert("Ayaw tawn blangkuhi madam");         
+               }
+        }
+
+        function joinArray() {
+            let join = itemArray.join(" / ");
+            document.getElementById('displayJoin').innerHTML = `<b>Joined array items with backslash:</b> ${join}`;
+        }
+// pop() method 
+        function popItem() {
+            let popItem = itemArray.pop();
+            document.getElementById("popItem").innerHTML = `Poped item: ${popItem}`;
+            document.getElementById("display").innerHTML = `<b>Existing array :</b>[${itemArray}]`;
+        }
+// shift() method 
+        function shiftItem() {
+            let shiftItem = itemArray.shift();
+            document.getElementById("shiftItem").innerHTML = `Shifted item: ${shiftItem}`;
+            document.getElementById("display").innerHTML = `<b>Existing array : </b>[${itemArray}]`;
+        }
+// unshift() method 
+        function unshiftItem() {
+            let itemUnshift = document.getElementById('unshiftItem').value;
+            let unshiftItem = itemArray.unshift(itemUnshift);
+            document.getElementById("displayUnshift").innerHTML = `Unshifted item: ${itemUnshift}`;
+            document.getElementById("display").innerHTML = `<b>Existing array : </b>[${itemArray}]`;
+            document.getElementById('unshiftItem').value = "";
+        }
+// remove item from array or splice() method       
+        function removeItem() {
+            let deleteItem = document.getElementById('item').value;
+
+            if (item != "" && item != null) {
+                let deleteIndex = itemArray.indexOf(deleteItem); 
+                itemArray.splice(deleteIndex, 1);
+                document.getElementById('display').innerHTML = `<b>Existing array : </b>[${itemArray}]`;
+                document.getElementById('item'). value = "";
+            } else {
+                alert("Invalid")
+            }
+
+        }
+//  delete method        
+        function deleteItem() {
+            let deleteIndex = document.getElementById('deleteIndex').value;
+
+            if (deleteIndex != "" && deleteIndex != null) {
+                delete itemArray[deleteIndex];
+                document.getElementById('display').innerHTML = `<b>Existing array : </b>[${itemArray}]`;
+                document.getElementById('item'). value = "";
+            } else {
+                alert("Invalid")
+            }
+        }
+// concat() method 
+        function concatArray() {
+            const secondArray = [1,2,3,4,5];
+            const mergeArray = itemArray.concat(secondArray);
+
+            document.getElementById('mergeArray').innerHTML = `<b>Concatenated arrays:</b> ${mergeArray}`;
+        }
+// copyWithin() method 
+        function copyItem() {
+            let copiedItem = itemArray.copyWithin(1);
+            document.getElementById('display').innerHTML = `<b>Existing array : </b>[${itemArray}]`;
+        }        
+// flat() method 
+        function flatArray() {
+            let newItemArray = itemArray.flat();
+            document.getElementById('display').innerHTML = `<b>Existing array : </b>[${newItemArray}]`;
+        }
+// toSpliced() method 
+        function toSpliceItem() {
+            let toSplice = document.getElementById('item1').value;
+
+            if (item1 != "" && item1 != null) {
+                let toSpliceIndex = itemArray.indexOf(toSplice); 
+                let secondItemArray = itemArray.toSpliced(toSpliceIndex, 1);
+                document.getElementById('display').innerHTML = `<b>New existing array : </b>[${secondItemArray}]`;
+                document.getElementById('item1'). value = "";
+            } else {
+                alert("Invalid")
+            } 
+        }
+// slice() method
+        function sliceArray() {
+            let newArray = itemArray.slice(3);
+            document.getElementById('display').innerHTML = `<b>New existing array : </b>[${newArray}]`;
+            }
+    </script>
+</body>
+</html>
